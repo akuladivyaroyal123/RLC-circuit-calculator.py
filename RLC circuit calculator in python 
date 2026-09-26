@@ -1,0 +1,52 @@
+import math
+
+print("===== RLC Circuit Calculator =====")
+
+R = float(input("Enter Resistance R (ohms): "))
+L = float(input("Enter Inductance L (H): "))
+C = float(input("Enter Capacitance C (F): "))
+f = float(input("Enter Frequency f (Hz): "))
+V = float(input("Enter Supply Voltage V (V): "))
+
+# Angular frequency
+omega = 2 * math.pi * f
+
+# Inductive reactance
+XL = omega * L
+
+# Capacitive reactance
+XC = 1 / (omega * C)
+
+# Net reactance
+X = XL - XC
+
+# Impedance
+Z = math.sqrt(R**2 + X**2)
+
+# Current
+I = V / Z
+
+# Power factor
+PF = R / Z
+
+# Resonant frequency
+fr = 1 / (2 * math.pi * math.sqrt(L * C))
+
+# Power
+P = V * I * PF
+
+print("\n===== Results =====")
+print("Inductive Reactance (XL) =", XL, "ohms")
+print("Capacitive Reactance (XC) =", XC, "ohms")
+print("Impedance (Z) =", Z, "ohms")
+print("Current (I) =", I, "A")
+print("Power Factor =", PF)
+print("Resonant Frequency =", fr, "Hz")
+print("Real Power =", P, "W")
+
+if XL > XC:
+    print("Circuit is INDUCTIVE")
+elif XC > XL:
+    print("Circuit is CAPACITIVE")
+else:
+    print("Circuit is at RESONANCE")
